@@ -84,8 +84,17 @@ def twitter(url):
     tweets = []
     last_tweet_date = date.today()
     run = True
-    while run:
+    old_height = 0
+    scroll_warning = 0
+    while (run and scroll_warning<10):
         body.send_keys(Keys.PAGE_DOWN)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height != old_height:
+            scroll_warning = 0
+        else:
+            scroll_warning += 1
+        old_height = new_height
+        
         html = driver.page_source
         soup = bs(html,'lxml')
         timeline = soup.findAll("div", {"data-testid" : "tweet"})
@@ -97,6 +106,7 @@ def twitter(url):
                 if not response['is_retweet']:
                     tweet_time = response['time']
                     run = feb_or_later(tweet_time)
+                    
                     
                     
                 
