@@ -34,3 +34,18 @@ CREATE TABLE governors_twitter (governor_id INTEGER,
 
 ALTER TABLE governors_twitter ADD CONSTRAINT fk_governor_id FOREIGN KEY (governor_id)
 REFERENCES governors(governor_id);
+
+ALTER TABLE governors_twitter ADD CONSTRAINT pk_handle PRIMARY KEY (handle_id);
+
+
+
+-- Tweets Table (Run with Jupyter Upload)
+CREATE TABLE tweets (tweet_id SERIAL PRIMARY KEY,
+                     handle_id INTEGER,
+					 about_covid BOOLEAN,
+					 tweet_date VARCHAR(10),
+					 tweet_handle TEXT,
+					 is_retweet BOOLEAN);
+ALTER TABLE tweets ADD CONSTRAINT fk_handle_id FOREIGN KEY (handle_id)
+	REFERENCES governors_twitter(handle_id);
+
