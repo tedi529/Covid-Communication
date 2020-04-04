@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport", content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content='ie=edge'>
+    <title>Covid Communication</title>
+    <!-- Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/lumen/bootstrap.min.css">
+
+      <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Our stylesheet -->
+    <link rel="stylesheet" href="static/css/style.css">
+</head>  
+
+<body>
+    <!-- Content Section -->
+    <div class="wrapper">
+        
+        <!-- Dashboard Title and Subtitle -->
+        <div class="covid text-center">
+            <h1>Covid Communication</h1>
+            <p>Use the interactive charts below to explore US gubernatorial Covid-19 Twitter Communications</p>
+        </div>
+        
+        <!-- Dashboard Information and Graphs -->
+        <div class="container">
+            <div class="row margin-top-50">
+
+                <div class="col-md-2">
+                    <div class="well">
+                        <h5> Governor </h5>
+                        <select id="selDataset">
+                        </select>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">Communication Info</h5>
+                        </div>
+                        <div id="sample-metadata" class="panel-body"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="bar-area" id="bar_chart"></div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class= "table-area" id="table"></div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="bubble-area" id='bubble_chart'></div>
+                </div>
+
+            </div>
+
+        </div>  
+
+    </div>
+    <!-- End Content Section -->
+
+    <!-- Start Footer Section -->
+    <footer>
+        <p class="footer"> Copyright tlatinska & jspear 2020</p>
+      </footer>
+    <!-- End Footer Section -->
+    
+    <!-- JS Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    
+    <!-- D3 Javscript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    
+    <!-- Our JS -->
+    <script src="static/js/app.js"></script>
+
+</body>
+</html>
