@@ -1,0 +1,96 @@
+html,
+body { 
+    height:100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
+.wrapper {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 100px;
+    overflow: auto;
+}
+
+/* The styles for the parallax */
+.covid {
+    position: relative;
+    height: 400px;
+    padding: 20px;
+    margin: 0;
+    background-image: url("../images/twittercorona.jpg");
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-size: cover;
+}
+
+.covid h1 {
+    margin-top: 100px;
+    font-size: 4rem;
+    animation: title 1.2s forwards linear;
+}
+
+.covid p {
+    font-size: 2rem;
+    animation: subtitle 1.2s forwards linear;
+}
+
+/* ID Panel Choice */
+.well{
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid blue;
+    background-color: rgb(216, 214, 214);
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+/* ID Panel Display */
+.panel {
+    margin-top: 30px;
+    border: 1px solid blue;
+    border-radius: 3px;
+}
+
+.panel-heading {
+    text-align: center;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+.panel-body {
+    text-align: left;
+    background-color: rgb(216, 214, 214);
+    padding: 10px;
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    position: bottom;
+    bottom: 0;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+
+    .covid h1 {
+        margin-top:50px;
+        font-size: 3rem;
+        animation: title 1.2s forwards linear;
+    }
+    
+    .covid p {
+        font-size: 2rem;
+        animation: subtitle 1.2s forwards linear;
+    }
+
+    .panel-title {
+        margin-top:50px;
+        font-size: 3rem;
+        animation: title 1.2s forwards linear;
+    }
+
+}
