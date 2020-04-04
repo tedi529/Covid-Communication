@@ -1,0 +1,51 @@
+governor_id,governor,state,party,inauguration,term_begin,term_end,term_limit
+1,Kay Ivey,Alabama,Republican,"April 10, 2017",2017,2023,false
+2,Mike Dunleavy,Alaska,Republican,"December 3, 2018",2018,2022,false
+3,Doug Ducey,Arizona,Republican,"January 5, 2015",2015,2023,true
+4,Asa Hutchinson,Arkansas,Republican,"January 13, 2015",2015,2023,true
+5,Gavin Newsom,California,Democratic,"January 7, 2019",2019,2023,false
+6,Jared Polis,Colorado,Democratic,"January 8, 2019",2019,2023,false
+7,Ned Lamont,Connecticut,Democratic,"January 9, 2019",2019,2023,false
+8,John Carney,Delaware,Democratic,"January 17, 2017",2017,2021,false
+9,Ron DeSantis,Florida,Republican,"January 8, 2019",2019,2023,false
+10,Brian Kemp,Georgia,Republican,"January 14, 2019",2019,2023,false
+11,David Ige,Hawaii,Democratic,"December 1, 2014",2014,2022,true
+12,Brad Little,Idaho,Republican,"January 7, 2019",2019,2023,false
+13,J. B. Pritzker,Illinois,Democratic,"January 14, 2019",2019,2023,false
+14,Eric Holcomb,Indiana,Republican,"January 9, 2017",2017,2021,false
+15,Kim Reynolds,Iowa,Republican,"May 24, 2017",2017,2023,false
+16,Laura Kelly,Kansas,Democratic,"January 14, 2019",2019,2023,false
+17,Andy Beshear,Kentucky,Democratic,"December 10, 2019",2019,2023,false
+18,John Bel Edwards,Louisiana,Democratic,"January 11, 2016",2016,2024,true
+19,Janet Mills,Maine,Democratic,"January 2, 2019",2019,2023,false
+20,Larry Hogan,Maryland,Republican,"January 21, 2015",2015,2023,true
+21,Charlie Baker,Massachusetts,Republican,"January 8, 2015",2015,2023,false
+22,Gretchen Whitmer,Michigan,Democratic,"January 1, 2019",2019,2023,false
+23,Tim Walz,Minnesota,Democratic,"January 7, 2019",2019,2023,false
+24,Tate Reeves,Mississippi,Republican,"January 14, 2020",2020,2024,false
+25,Mike Parson,Missouri,Republican,"June 1, 2018",2018,2021,false
+26,Steve Bullock,Montana,Democratic,"January 7, 2013",2013,2021,true
+27,Pete Ricketts,Nebraska,Republican,"January 8, 2015",2015,2023,true
+28,Steve Sisolak,Nevada,Democratic,"January 7, 2019",2019,2023,false
+29,Chris Sununu,New Hampshire,Republican,"January 5, 2017",2017,2021,false
+30,Phil Murphy,New Jersey,Democratic,"January 16, 2018",2018,2022,false
+31,Michelle Lujan Grisham,New Mexico,Democratic,"January 1, 2019",2019,2023,false
+32,Andrew Cuomo,New York,Democratic,"January 1, 2011",2011,2022,false
+33,Roy Cooper,North Carolina,Democratic,"January 1, 2017",2017,2021,false
+34,Doug Burgum,North Dakota,Republican,"December 15, 2016",2016,2020,false
+35,Mike DeWine,Ohio,Republican,"January 14, 2019",2019,2023,false
+36,Kevin Stitt,Oklahoma,Republican,"January 14, 2019",2019,2023,false
+37,Kate Brown,Oregon,Democratic,"February 18, 2015",2015,2023,true
+38,Tom Wolf,Pennsylvania,Democratic,"January 20, 2015",2015,2023,true
+39,Gina Raimondo,Rhode Island,Democratic,"January 6, 2015",2015,2023,true
+40,Henry McMaster,South Carolina,Republican,"January 24, 2017",2017,2023,false
+41,Kristi Noem,South Dakota,Republican,"January 5, 2019",2019,2023,false
+42,Bill Lee,Tennessee,Republican,"January 19, 2019",2019,2023,false
+43,Greg Abbott,Texas,Republican,"January 20, 2015",2015,2023,false
+44,Gary Herbert,Utah,Republican,"August 11, 2009",2009,2021,true
+45,Phil Scott,Vermont,Republican,"January 5, 2017",2017,2021,false
+46,Ralph Northam,Virginia,Democratic,"January 13, 2018",2018,2022,true
+47,Jay Inslee,Washington,Democratic,"January 16, 2013",2013,2021,false
+48,Jim Justice,West Virginia,Republican,"January 16, 2017",2017,2021,false
+49,Tony Evers,Wisconsin,Democratic,"January 7, 2019",2019,2023,false
+50,Mark Gordon,Wyoming,Republican,"January 7, 2019",2019,2023,false
