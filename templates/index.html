@@ -17,7 +17,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
     <!-- Our stylesheet -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>  
 
 <body>
@@ -32,38 +32,47 @@
         
         <!-- Dashboard Information and Graphs -->
         <div class="container">
-            <div class="row margin-top-50">
 
+            <div class="row margin-top-50">
                 <div class="col-md-2">
                     <div class="well">
                         <h5> Governor </h5>
-                        <select id="selDataset">
+                        <select id="selGovernor1">
                         </select>
                     </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">Communication Info</h5>
-                        </div>
-                        <div id="sample-metadata" class="panel-body"></div>
-                    </div>
                 </div>
 
-                <div class="col-md-5">
-                    <div class="bar-area" id="bar_chart"></div>
+                <div class="col-md-10">
+                    <div class="slider-area" id="slider_graph"></div>
                 </div>
-
-                <div class="col-md-5">
-                    <div class= "table-area" id="table"></div>
-                </div>
-
             </div>
 
             <div class="row">
-                
-                <div class="col-md-12">
-                    <div class="bubble-area" id='bubble_chart'></div>
+                <div class="col-md-2">
+                    <div class="well">
+                        <h5> Governor </h5>
+                        <select id="selGovernor2">
+                        </select>
+                    </div>
                 </div>
+                
+                <div class="col-md-10">
+                    <div class="bar-area" id='bar_graph'></div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="well">
+                        <h5> Governor </h5>
+                        <select id="selGovernor3">
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-10">
+                    <div class="line-area" id='line_graph'></div>
+                </div>
             </div>
 
         </div>  
@@ -92,7 +101,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     
     <!-- Our JS -->
-    <script src="static/js/app.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/app1.js"></script>
 
 </body>
 </html>

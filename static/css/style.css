@@ -41,29 +41,10 @@ body {
 .well{
     margin-top: 30px;
     padding: 10px;
-    border: 1px solid blue;
+    border: 1px solid lightskyblue;
     background-color: rgb(216, 214, 214);
     border-radius: 10px;
     opacity: 0.7;
-}
-
-/* ID Panel Display */
-.panel {
-    margin-top: 30px;
-    border: 1px solid blue;
-    border-radius: 3px;
-}
-
-.panel-heading {
-    text-align: center;
-    background-color: lightblue;
-    padding: 5px;
-}
-
-.panel-body {
-    text-align: left;
-    background-color: rgb(216, 214, 214);
-    padding: 10px;
 }
 
 /* Footer styling */
