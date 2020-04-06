@@ -6,4 +6,4 @@
 <hr>
 
 <ul>
-  <li> We scraped the professional and personal twitter handles of every US governor from February 1, 2020 to April 3, 2020 in this <a href="https://github.com/tedi529/Project-CovidCommunication/blob/master/analysis/Tweet_Scraper_Final.ipynb">notebook</a></li>
+  <li> We scraped the professional and personal twitter handles of every US governor from February 1, 2020 to April 3, 2020 in this <a href="https://github.com/tedi529/Project-CovidCommunication/blob/master/analysis/Tweet_Scraper_Final.ipynb">notebook</a>.</li>
