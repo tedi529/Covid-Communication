@@ -22,7 +22,6 @@ import datetime as dt
 #Create ORM Classes
 Base=declarative_base()
 
-
 class Governors(Base):
     __tablename__="governors"
     governor_id = Column(Integer, primary_key = True, autoincrement=True)
@@ -82,8 +81,8 @@ def index():
     return render_template("index.html")
 
 @app.route("/api/<table_name>")
-def stock_currency(table_name):
-    return Response(pd.read_sql(f"SELECT * FROM {table_name}",engine).to_json(orient='records'))
+def tweet_tables(table_name):
+    return Response(pd.read_sql(f"SELECT * FROM {table_name}", engine).to_json(orient='records'))
 
 
 if __name__ == "__main__":
