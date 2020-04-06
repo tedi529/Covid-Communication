@@ -10,3 +10,5 @@
   - <p> We used the <a href="https://github.com/nytimes/covid-19-data">NYT Covid-19 Github Repository</a> to obtain state case information  for all dates <a href="https://github.com/tedi529/Covid-Communication/blob/master/analysis/Case_Count_Scraper.ipynb">here</a>.</p>
 
 <p> We manipulated the data and built our visualizations using <a href="https://leafletjs.com/">Leaflet</a> and <a href="https://plotly.com/">Plotly</a> in the following files: <a href="https://github.com/tedi529/Covid-Communication/blob/master/static/js/app.js">app.js</a> and <a href="https://github.com/tedi529/Covid-Communication/blob/master/static/js/app1.js">app1.js</a>.</p> 
+
+## Visualizations
