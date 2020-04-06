@@ -21,6 +21,7 @@ body {
     padding: 20px;
     margin: 0;
     background-image: url("../images/twittercorona.jpg");
+    opacity: 0.75;
     background-attachment: fixed;
     background-position: bottom center;
     background-size: cover;
@@ -29,15 +30,19 @@ body {
 .covid h1 {
     margin-top: 100px;
     font-size: 4rem;
+    font-weight: 600;
     animation: title 1.2s forwards linear;
+    color: black;
 }
 
 .covid p {
     font-size: 2rem;
+    font-weight: 500;
     animation: subtitle 1.2s forwards linear;
+    color: black;
 }
 
-/* ID Panel Choice */
+/* Panel Choice */
 .well{
     margin-top: 30px;
     padding: 10px;
