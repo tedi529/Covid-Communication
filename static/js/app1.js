@@ -32,10 +32,10 @@ while (date <= makeDate('2020-04-03')) {
 // Read information with API call to our page
 let governorsPromise = d3.json("/api/governors");
 let governorTwittersPromise = d3.json("/api/governors_twitter");
-let governorTweetsPromise = d3.json("/api/tweets");
+let tweetsPromise = d3.json("/api/tweets");
 let casesPromise = d3.json("/api/cases");
 
-let allDataPromises = [governorsPromise, governorTwittersPromise, governorTweetsPromise, casesPromise];
+let allDataPromises = [governorsPromise, governorTwittersPromise, tweetsPromise, casesPromise];
 
 Promise.all(allDataPromises).then(([governors, governors_twitter, tweets, cases]) => {
         
@@ -50,7 +50,7 @@ Promise.all(allDataPromises).then(([governors, governors_twitter, tweets, cases]
   
   // Group cases by state
   let grouped_cases = _.groupBy(cases_table, "state");
-  console.log(grouped_cases)
+  
   let transformedGroupedCases = _.mapObject(grouped_cases, (dayRecords) => {
       
       // Sort and remove records before 02.01.2020
@@ -87,7 +87,6 @@ Promise.all(allDataPromises).then(([governors, governors_twitter, tweets, cases]
   }));  
 
   let table2 = join2(tweets, table1);
-  console.log(table2)
 
   // Format each tweet date
   table2.forEach(function(tweet) {
@@ -137,8 +136,6 @@ Promise.all(allDataPromises).then(([governors, governors_twitter, tweets, cases]
   // Create states array
   let states = Object.keys(tweets_counter);
 
-  console.log(tweets_counter)
-
   // Create dropdown menu function
   function loadDropdown() {
     let dropdownMenu = $("#selGovernor2");
@@ -173,19 +170,38 @@ Promise.all(allDataPromises).then(([governors, governors_twitter, tweets, cases]
     let trace_cases = {
       x: date_arr,
       y: transformedGroupedCases[state].map(x => x.cases),
-      type: "line"
+      yaxis: "y2",
+      name: "Covid-19 Cases",
+      type: 'line',
+      line: {color: 'green'}
     }
 
-    let data = [trace_non_covid, trace_covid, trace_cases];
+    let trace_deaths = {
+      x: date_arr,
+      y: transformedGroupedCases[state].map(x => x.deaths),
+      yaxis: "y2",
+      name: "Covid-19 Deaths",
+      type: 'line',
+      line: {color: 'red'}
+    }
 
-    let layout = {
+    let data1 = [trace_non_covid, trace_covid];
+    let data2 = [trace_cases, trace_deaths];
+    
+    let layout1 = {
       xaxis: {title: "Date"},
       yaxis: {title: "Tweet Count"},
       title: state,
       barmode: 'group'
     };
 
-    Plotly.newPlot('bar_graph', data, layout, {responsive: true});
+    let layout2 = {
+      xaxis: {title: "Date"},
+      yaxis: {title: "Count"}
+    };
+
+    Plotly.newPlot('bar_graph', data1, layout1, {responsive: true});
+    Plotly.newPlot('line_graph', data2, layout2, {responsive: true});
   }; 
 
   // Initialize the page with default plot of first governor
