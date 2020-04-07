@@ -63,10 +63,12 @@ class Tweets(Base):
 #Create Connection
 # engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Twitter_COVID19")
 # conn = engine.connect()
-# session = Session(bind=engine)
-# Base.metadata.create_all(engine)
-DATABASE_URL = os.environ['DATABASE_URL']
-conn= psycopg2.connect(DATABASE_URL,sslmode='require')
+
+cxnstring = os.environ['DATABASE_URL']
+engine = create_engine(cxnstring,pool_recycle=3600)
+conn = engine.connect()
+session = Session(bind=engine)
+Base.metadata.create_all(engine)
 
 
 #################################################
