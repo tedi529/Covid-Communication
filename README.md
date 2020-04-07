@@ -14,4 +14,4 @@
 <p> We manipulated the data and built our visualizations using <a href="https://leafletjs.com/">Leaflet</a> and <a href="https://plotly.com/">Plotly</a> in the following files: <a href="https://github.com/tedi529/Covid-Communication/blob/master/static/js/app.js">app.js</a> and <a href="https://github.com/tedi529/Covid-Communication/blob/master/static/js/app1.js">app1.js</a>.</p> 
 
 ## Observations
-<p> As expected, the count and proportion of tweets about Covid-19 by each governor increases as the instance of the virus increases in each state. The majority of tweets about Covid-19 occur after mid-March with very few before mid February. </p>
+<p> As expected, the count and proportion of tweets about Covid-19 by each governor increases as the instance of the virus increases in each state. The majority of tweets about Covid-19 occur after mid-March with very few before mid-February. </p>
