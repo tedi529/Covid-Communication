@@ -36,7 +36,9 @@
         <!-- Dashboard Information and Graphs -->
         <div class="container">
 
+
             <div class="row margin-top-50">
+                
             
                 <div class="col-md-2">
                     <div class="well">
@@ -47,19 +49,20 @@
                             
                         </select>
                     </div>
+                    <h5>Percent of Tweets Containing COVID-related terms:</h5>
                     <div class="row">
-                        <div class=col-2>
+                        <div class=col-xs-2>
                             <svg width=50 height=200>
                                 <rect y= 24 width = 25 height = 25 style="fill:green"></rect>
-                                <rect y= 100 width = 25 height = 25 style="fill:red"></rect>
+                                <rect y= 85 width = 25 height = 25 style="fill:red"></rect>
                                 
                             </svg>                            
                         </div>
-                        <div class=col-10>
+                        <div class=col-xs-10>
                             <br>
-                            <p>0% of tweets refer to COVID-related terms</p>
+                            <p>0%</p>
                             <br>
-                            <p>100% of tweets refer to COVID-related terms</p>
+                            <p>100%</p>
 
                         </div>
                     </div>
@@ -67,6 +70,7 @@
                 </div>
 
                 <div class="col-md-10">
+                    <h3>Percent of Tweets About COVID-19</h3>
                     <div id="map"></div>
                     <span class="label label-info" id="slider_label">Adjust by Week</span>
                     <div id="slider"></div>
