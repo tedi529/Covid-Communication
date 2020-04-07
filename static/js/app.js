@@ -170,7 +170,9 @@ d3.json("/api/governors").then(function(governors) {
         covid = info.covid
         noncovid = info.noncovid
         proportion = divide(covid,all);
-        interval = (timestamp(stop) - timestamp(start))/day_length
+        console.log(stop);
+        gap = timestamp(stop) - timestamp(start)
+        interval = (gap)/day_length
         rate = all/interval
         adjusted_proportion = 0.5+Math.pow(Math.abs(proportion-0.5),1.6)*Math.sign(proportion-0.5);
         proportion=adjusted_proportion
@@ -178,11 +180,14 @@ d3.json("/api/governors").then(function(governors) {
 
         if(rate<=0){
           transparency = 0;
-        } else if(rate < 5){
-          transparency = 1-Math.pow((5-rate/5),2);
+        } else if(rate < 50){
+          console.log('hi');
+          transparency = 1-Math.pow(((50-rate)/50),8);
         } else{
           transparency = 1;
         }
+        console.log(transparency);
+        
         
 
         green = 36*proportion + 213*(1-proportion);
@@ -204,10 +209,10 @@ d3.json("/api/governors").then(function(governors) {
 
         function style(feature){
           return {
-            fillColor:get_color(feature.properties.tweets)[0],
+            fillColor:get_color(feature.properties.tweets,start,stop)[0],
             weight: 2,
             color: 'black',
-            fillOpacity: get_color(feature.properties.tweets)[1]
+            fillOpacity: get_color(feature.properties.tweets,start,stop)[1]
           };
         }
         map.remove();
@@ -276,7 +281,7 @@ d3.json("/api/governors").then(function(governors) {
               // Create two timestamps to define a range.
               range: {
               min: timestamp('2020-02-01'),
-              max: timestamp('2020-04-03')
+              max: timestamp('2020-03-27')
               },
 
               // Steps of one week
@@ -335,7 +340,7 @@ d3.json("/api/governors").then(function(governors) {
         // Create two timestamps to define a range.
         range: {
         min: timestamp('2020-02-01'),
-        max: timestamp('2020-04-03')
+        max: timestamp('2020-03-27')
         },
 
         // Steps of one week
