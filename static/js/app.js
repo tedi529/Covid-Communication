@@ -172,7 +172,7 @@ d3.json("/api/governors").then(function(governors) {
         proportion = divide(covid,all);
         interval = (timestamp(stop) - timestamp(start))/day_length
         rate = all/interval
-        adjusted_proportion = 1+Math.pow(Math.abs(proportion-0.5),1.6)*Math.sign(proportion-0.5);
+        adjusted_proportion = 0.5+Math.pow(Math.abs(proportion-0.5),1.6)*Math.sign(proportion-0.5);
         proportion=adjusted_proportion
         
 
@@ -189,7 +189,7 @@ d3.json("/api/governors").then(function(governors) {
         red = 213*proportion +36*(1-proportion);
         blue = 40;
 
-        return `rgb(${red},${green},${blue},${transparency})`
+        return [`rgb(${red},${green},${blue})`,transparency]
       };
 
 
@@ -204,10 +204,10 @@ d3.json("/api/governors").then(function(governors) {
 
         function style(feature){
           return {
-            fillColor:get_color(feature.properties.tweets),
+            fillColor:get_color(feature.properties.tweets)[0],
             weight: 2,
             color: 'black',
-            fillOpacity: 0.7
+            fillOpacity: get_color(feature.properties.tweets)[1]
           };
         }
         map.remove();
