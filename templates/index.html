@@ -37,16 +37,21 @@
         <div class="container">
 
             <div class="row margin-top-50">
+            
                 <div class="col-md-2">
                     <div class="well">
-                        <h5> State </h5>
-                        <select id="selGovernor1">
+                        <h5> Controls </h5>
+                        <select id="selMap">
+                            <option value="week">Scroll by Week</option>
+                            <option value="day">Scroll by Date Range</option>
+                            
                         </select>
                     </div>
                 </div>
 
                 <div class="col-md-10">
-                    <div class="slider-area" id="slider_graph"></div>
+                    <div id="map"></div>
+                    <span class="label label-info" id="slider_label">Adjust by Week</span>
                     <div id="slider"></div>
                     <p id="event-start"></p>
                     <p id="event-end"></p>
@@ -109,6 +114,9 @@
     <!--noUISlider-->
     <script src="js/nouislider.js"></script>
     <script src="js/wNumb.js"></script>
+
+    <!-- GeoJSON from leaflet.js.com/examples/choropleth -->
+    <script src="js/us-states.js"></script>
 
     <!-- Our JS -->
     <script src="js/app.js"></script>

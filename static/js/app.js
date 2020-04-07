@@ -1,4 +1,32 @@
+statesData.features = statesData.features.filter(x => (x.properties.name != 'District of Columbia') && (x.properties.name != 'Puerto Rico'));
+
+let day_length = 24 * 60 * 60 * 1000;
+// Based on Code from https://leafletjs.com/examples/choropleth/
+let API_KEY = "pk.eyJ1IjoiamFjb2JzcGVhcjc3IiwiYSI6ImNrN3pjaThlajAwemQzaHA5bzM1eGJzYXYifQ.MSARNqh9xc7rTb8PQ1p4Qw";
+var mapboxAccessToken = API_KEY;
+var map = L.map('map').setView([37.8, -96], 4);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
+    id: 'mapbox/light-v9',
+    attribution:  "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tileSize: 512,
+    zoomOffset: -1
+}).addTo(map);
+
+
+
+date_range = ['2020-02-01','2020-02-07'];
+
+  
+
 // Create a string representation of the date.
+function divide(n,d){
+  if(d!=0){
+    return n/d;
+  } else {
+    return 0;
+  }
+};
 
 function two_digit(entry){
   my_char = entry.toString() 
@@ -17,6 +45,16 @@ function formatDate(date) {
 
 function makeDate(my_str) {
   return new Date(my_str+'T00:00');
+}
+
+function addWeek(myStr){
+  temp = new Date(makeDate(myStr).getTime()+7*day_length);
+  return formatDate(temp);
+}
+
+// Code based on examples from noUSSlider documentation
+function timestamp(str) {
+  return makeDate(str).getTime();
 }
 
 date_arr = []
@@ -51,7 +89,7 @@ d3.json("/api/governors").then(function(governors) {
       }));  
 
       let table2 = join2(tweets, table1);
-      console.log(table2)
+      
 
       table2.forEach(function(tweet){
         tweet.date_comp = makeDate(tweet.tweet_date);
@@ -103,46 +141,241 @@ d3.json("/api/governors").then(function(governors) {
         tweets_counter[state] = dates
       });
 
-      console.log(tweets_counter);
+      
+
+      function add_tweets(start,stop,state){
+        state_data = tweets_counter[state];
+        if(state_data===undefined){
+          return {all:0,covid:0,noncovid:0}
+        } else{
+          data = tweets_counter[state].filter(function(row){
+            after_start = timestamp(start)<=timestamp(row[0]);
+            before_stop = timestamp(stop)>=timestamp(row[0]);
+            return (after_start && before_stop);
+          });
+          total = {all:0,covid:0,noncovid:0};
+          data.forEach(function(day){
+            total.all = total.all + day[1].all;
+            total.covid = total.covid + day[1].covid;
+            total.noncovid = total.noncovid + day[1].non_covid;
+          });
+          return total;
+
+        }
+      }
+
+
+      function get_color(info,start,stop){
+        all = info.all
+        covid = info.covid
+        noncovid = info.noncovid
+        proportion = divide(covid,all);
+        interval = (timestamp(stop) - timestamp(start))/day_length
+        rate = all/interval
+        adjusted_proportion = 1+Math.pow(Math.abs(proportion-0.5),1.6)*Math.sign(proportion-0.5);
+        
+
+        if(rate<=0){
+          transparency = 0;
+        } else if(rate < 5){
+          transparency = 1-Math.pow((5-rate/5),2);
+        } else{
+          transparency = 1;
+        }
+        
+
+        green = 36*proportion + 213*(1-proportion);
+        red = 213*proportion +36*(1-proportion);
+        blue = 40;
+
+        return `rgb(${red},${green},${blue},${transparency})`
+      };
+
+
+      function update_map(start,stop){
+
+        
+        statesData.features.forEach(function(element){
+          info = element.properties;
+          state = info.name
+          info.tweets =  add_tweets(start,stop,state)        
+        });
+
+        function style(feature){
+          return {
+            fillColor:get_color(feature.properties.tweets),
+            weight: 2,
+            color: 'black'
+          };
+        }
+        map.remove();
+        map = L.map('map').setView([37.8, -96], 4);
+        
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
+            id: 'mapbox/light-v9',
+            attribution:  "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map);    
+
+        fill_layer = L.geoJson(statesData,{style: style}).addTo(map);
+      }
+
+      
+      
+      function make_slider(value){
+        console.log(value);
+        if(value==="day"){
+          slider = document.getElementById('slider');
+          slider.noUiSlider.destroy();
+          noUiSlider.create(slider, {
+            // Create two timestamps to define a range.
+            range: {
+            min: timestamp('2020-02-01'),
+            max: timestamp('2020-04-03')
+            },
+    
+            // Steps of one week
+            step: day_length,
+    
+            // Two more timestamps indicate the handle starting positions.
+            start: [timestamp(date_range[0]), timestamp(date_range[1])],
+    
+            // No decimals
+            format: wNumb({
+              decimals: 0
+              })
+            });
+    
+          var dateValues = [
+            d3.select('#event-start'),
+            d3.select('#event-end')
+          ];
+    
+          handle_id = ['From: ',"To: "]
+    
+          slider.noUiSlider.on('update', function (values, handle) {
+            handle_date = new Date(+values[handle]);
+            dateValues[handle].text(`${handle_id[handle]}${formatDate(handle_date)}`);
+            date_range[handle] = formatDate(handle_date);
+            update_map(date_range[0],date_range[1]);        
+          });
+    
+
+
+
+        } else if(value==="week"){
+          // Code based on examples from noUiSlider documentation
+      
+            slider = document.getElementById('slider');
+            slider.noUiSlider.destroy();   
+
+            noUiSlider.create(slider, {
+              // Create two timestamps to define a range.
+              range: {
+              min: timestamp('2020-02-01'),
+              max: timestamp('2020-04-03')
+              },
+
+              // Steps of one week
+              step: day_length,
+
+              // Two more timestamps indicate the handle starting positions.
+              start: [timestamp(date_range[0])],
+
+              // No decimals
+              format: wNumb({
+                decimals: 0
+                })
+              });
+
+            var dateValues = [
+              d3.select('#event-start'),
+              d3.select('#event-end')
+            ];
+
+            handle_id = ['From: ',"To: "]
+
+            slider.noUiSlider.on('update', function (arr) {
+              time = parseInt(arr[0]);     
+              date_1 = new Date(time)
+              week_range = [formatDate(date_1),addWeek(formatDate(date_1))];
+              week_range.forEach(function(my_date,idx){
+                dateValues[idx].text(`${handle_id[idx]}${my_date}`);
+                date_range[idx] = my_date;
+              });                        
+              update_map(date_range[0],date_range[1]);       
+            });
+
+              }
+      }
+            
+      selMap = d3.select('#selMap');
+      selMap.on('change',function(){
+        val = this.value;
+        if(val==="day"){
+          text = "Adjust by Date Range";
+        } else if(val === "week"){
+          text = "Adjust by Week";
+        }
+        
+        make_slider(this.value);
+        d3.select("#slider_label").text(text);
+      })
 
 
       
-      // Code based on examples from noUSSlider documentation
-      function timestamp(str) {
-        return new Date(str).getTime();
-      }
+      // Code based on examples from noUiSlider documentation
+      
+      slider = document.getElementById('slider'); 
 
-      var dateSlider = d3.select('#slider');
-
-      noUiSlider.create(dateSlider, {
+      noUiSlider.create(slider, {
         // Create two timestamps to define a range.
         range: {
-        min: timestamp('2010'),
-        max: timestamp('2016')
-      },
+        min: timestamp('2020-02-01'),
+        max: timestamp('2020-04-03')
+        },
 
-      // Steps of one week
-      step: 7 * 24 * 60 * 60 * 1000,
+        // Steps of one week
+        step: day_length,
 
-      // Two more timestamps indicate the handle starting positions.
-      start: [timestamp('2011'), timestamp('2015')],
+        // Two more timestamps indicate the handle starting positions.
+        start: [timestamp(date_range[0])],
 
-      // No decimals
-      format: wNumb({
-        decimals: 0
-        })
-      });
+        // No decimals
+        format: wNumb({
+          decimals: 0
+          })
+        });
 
       var dateValues = [
         d3.select('#event-start'),
         d3.select('#event-end')
       ];
 
-      dateSlider.noUiSlider.on('update', function (values, handle) {
-        handle_date = new Date(+values[handle]);
-        console.log(handle_date)
-        // dateValues[handle].innerHTML = formatDate();
-      });
+      handle_id = ['From: ',"To: "]
+
+      slider.noUiSlider.on('update', function (arr) {
+        time = parseInt(arr[0]);     
+        date_1 = new Date(time)
+        week_range = [formatDate(date_1),addWeek(formatDate(date_1))];
+        week_range.forEach(function(my_date,idx){
+          dateValues[idx].text(`${handle_id[idx]}${my_date}`);
+          date_range[idx] = my_date;
+        });                           
+        update_map(date_range[0],date_range[1]); 
+      }
+      )
+      
+
+      
+
+
+      update_map(date_range[0],date_range[1]);
+
+
+
+
 
 
 
