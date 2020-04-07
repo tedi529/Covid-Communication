@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, url_for, Response
 import numpy as np
 import os
+import psycopg2
 
 from time import sleep
 import requests
@@ -60,10 +61,13 @@ class Tweets(Base):
 
     
 #Create Connection
-engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Twitter_COVID19")
-conn = engine.connect()
-session = Session(bind=engine)
-Base.metadata.create_all(engine)
+# engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Twitter_COVID19")
+# conn = engine.connect()
+# session = Session(bind=engine)
+# Base.metadata.create_all(engine)
+DATABASE_URL = os.environ['DATABASE_URL']
+conn= psycopg2.connect(DATABASE_URL,sslmode='require')
+
 
 #################################################
 # Flask Setup
@@ -82,7 +86,7 @@ def index():
 
 @app.route("/api/<table_name>")
 def tweet_tables(table_name):
-    return Response(pd.read_sql(f"SELECT * FROM {table_name}", engine).to_json(orient='records'))
+    return Response(pd.read_sql(f"SELECT * FROM {table_name}", conn).to_json(orient='records'))
 
 
 if __name__ == "__main__":
