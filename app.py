@@ -7,7 +7,7 @@ from time import sleep
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-from config import password
+# from config import password
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, func, create_engine, ForeignKey
