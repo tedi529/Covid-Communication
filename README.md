@@ -2,7 +2,7 @@
 
 <p> During the ongoing coronavirus crisis, this project aims to visualize the twitter communication of governors in all 50 states of the United States, as the diagnosed cases increase in each state from nearly no diagnosed cases on February 1, 2020 to the more than two hundred seventy thousand diagnosed cases on April 3, 2020. </p>
 
-## Method
+## Approach
 <p> We compiled the following words as a good representation of whether a tweet's subject was Covid-19 as they are high-frequency words used in the context of the Covid-19 crisis: <strong> covid, virus, corona, distancing, masks, ppe, ventilators, flatten, test, healthcare professionals, healthcare workers, patients, spread, stay home, stayhome, unprecedented</strong>.</p>
   
 <p> We gathered governor tweets and Covid-19 case information in the process outlined below and loaded the data in a local PostgreSQL database. We then served our information using a <a href="https://github.com/tedi529/Covid-Communication/blob/master/app.py">Flask app</a>. </p>
