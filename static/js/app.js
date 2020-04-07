@@ -173,6 +173,7 @@ d3.json("/api/governors").then(function(governors) {
         interval = (timestamp(stop) - timestamp(start))/day_length
         rate = all/interval
         adjusted_proportion = 1+Math.pow(Math.abs(proportion-0.5),1.6)*Math.sign(proportion-0.5);
+        proportion=adjusted_proportion
         
 
         if(rate<=0){
