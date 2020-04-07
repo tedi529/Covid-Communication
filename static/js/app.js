@@ -205,7 +205,8 @@ d3.json("/api/governors").then(function(governors) {
           return {
             fillColor:get_color(feature.properties.tweets),
             weight: 2,
-            color: 'black'
+            color: 'black',
+            fillOpacity: 0.7
           };
         }
         map.remove();
